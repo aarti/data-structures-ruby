@@ -36,7 +36,7 @@ The MultiSet api must allow
     m = MultiSet.new([1,2,3,3]) 
     m.multiplicity(3) == 2
     m.multiplicity(2) == 1
-    m.multiplicity(4) == nil
+    m.multiplicity(4) == 0
     m.cardinality == 4
     m.remove(1)
     m.add(2)
@@ -50,6 +50,13 @@ The MultiSet api must allow
     m1.subset? m2 (subset)
     m1 * m2 (cartesian) 
   ```  
+
+3. What the api returns is important
+   It should not allow modification of internal data structure
+   Union, Intersection etc should return new object instances
+   Initializer should only allow enumerable types, or even only array or set type.
+  
+  
 ## Practical Examples of  Multiset
 
 1. Shopping Cart, with items and quantity
