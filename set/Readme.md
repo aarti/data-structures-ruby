@@ -132,7 +132,6 @@ A [Bloom Filter][5] is a probabilistic data structure used to check false positi
 
 The goal was to have enough foundational understanding to firstly use Sets when we need them and then to contribute back to Rails and Ruby with improvements.
 
-##Reference/Resources
 
 [1]: https://github.com/ruby/ruby/blob/ruby_2_0_0/lib/set.rb
 [2]: http://www.sitepoint.com/guide-ruby-collections-ii-hashes-sets-ranges/
