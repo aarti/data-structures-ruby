@@ -1,3 +1,4 @@
+# Ruby's Fixnum & Bignum can hold very large integers and automatically handle overflow. I decided to implement BitArray using an integer as storage. Please let me know what you think about code and functionality of a BitArray.
 class BitArray
   include Enumerable
 
