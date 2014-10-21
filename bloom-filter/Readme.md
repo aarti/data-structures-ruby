@@ -2,7 +2,7 @@
 
 [Wikipedia][6] describes a Bloom filter as a space-efficient probabilistic data structure that is used to test whether an element is a member of a set. It uses multiple hash functions to determine membership in a set.
 
-When an element is added to a filter, a subsequent membership test will definitely return True. However as more elements that are added to the set, the probability of false positives will increase. Elements are always added to the set, never removed.
+When an element is added to a filter, a subsequent membership test will definitely return True. However as more elements that are added to the set, the probability of false positives will increase. Elements are always added to the set, never removed. No Delete operation
 
 ## Implementations
 
@@ -20,8 +20,9 @@ A nice [interactive tutorial][1] on the bloom filter
 
 We need an array to store the results of the hash. We need a hash function, We can use cryptographic hash md5, sha1 from Ruby
 
+##TODO
+
 ```ruby
-   bloomfilter = 
 
 
 ```

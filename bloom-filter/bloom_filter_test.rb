@@ -3,45 +3,19 @@ require_relative 'bloom_filter'
 
 class BloomFilterTest < MiniTest::Unit::TestCase
 
-  def test_equal
-    assert_equal , BloomFilter.new(5).to_s
+  # Verified probability formulat and tests from http://hur.st/bloomfilter?n=1&p=0.01
+  def test_stats
+    assert_equal 0.01, BloomFilter.new(k: 7, m: 10).insert("a").false_positive_rate
+    b = BloomFilter.new(k: 2, m: 29)
+    10.times { |n| b.insert(n) }
+    assert_equal 0.25, b.false_positive_rate
   end 
   
-  def test_set
-    assert_equal "00100", BitArray.new(5).set(3).to_s
-    assert_equal "00010", BitArray.new(5).set(4).to_s
-    assert_equal "11100", BitArray.new(5).set([1,2,3]).to_s
-  end
-
-  def test_clear
-    assert_equal "01000", BitArray.new(5).set([1,2]).clear(1).to_s    
+  def test_include
+    b = BloomFilter.new(k: 2, m: 100)
+    b.insert "The Trumpet of the Swan"
+    assert_equal true, b.include?("The Trumpet of the Swan")
+    refute b.include?("E. B. White")   
   end  
   
-  def test_count
-    assert_equal 2, BitArray.new(5).set([1,2]).count 
-  end  
-
 end
-
-k = hashes
-m = size
-
-seed ( generate hash functions )
-
-
-
-
-bf = BloomFilter::Native.new(:size => 100, :hashes => 2, :seed => 1, :bucket => 3, :raise => false)
-bf.insert("test")
-bf.include?("test")     # => true
-bf.include?("blah")     # => false
-
-bf.delete("test")
-bf.include?("test")     # => false
-
-# Hash with a bloom filter!
-bf["test2"] = "bar"
-bf["test2"]             # => true
-bf["test3"]             # => false
-
-bf.stats
