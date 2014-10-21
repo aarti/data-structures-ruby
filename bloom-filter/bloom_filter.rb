@@ -36,7 +36,7 @@ class BloomFilter
     @k.times do |n|
       hash_val = Digest::MD5.hexdigest( item.to_s + n.to_s ).to_i(16)
       position = hash_val % @m
-      return true if @b.get(position) == 1
+      return @b.get(position)
     end     
     return false
   end  

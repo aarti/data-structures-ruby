@@ -1,24 +1,34 @@
 # Ruby's Fixnum & Bignum can hold very large integers and automatically handle overflow. I decided to implement BitArray using an integer as storage. Please let me know what you think about code and functionality of a BitArray.
+# The problem here counting from left to right
+
 class BitArray
   include Enumerable
 
+  #the first bit is not used
   def initialize size
     @size = size
     @field = 2**size 
   end
 
   def set *positions
-    positions.each {  |position| @field |= 1 << (@size - position) } 
+    positions.each do |position|
+      raise ArgumentError if position > @size 
+      @field |= 2**position
+    end
     self
   end
-  
-  def clear *positions
-    positions.each {  |position| @field ^= 1 << (@size - position) } 
+
+  def unset *positions
+    positions.each do |position|
+      raise ArgumentError if position > @size 
+      @field ^= 2**position 
+    end
     self
-  end  
+  end
 
   def get position
-    (@field >> (@size - position) ).to_s(2)[-1].to_i
+    raise ArgumentError if position > @size 
+    (@field >>  position) & 1 
   end
 
   def each(&block)
@@ -30,11 +40,10 @@ class BitArray
   end
 
   def count
-    @field.to_s(2)[1..-1].split("").inject(0) {|sum,bit| sum + bit.to_i}
+    inject(0,:+)
   end
   
 end
-
 
 
 
