@@ -3,7 +3,7 @@
 # m = Number of bits in the filter
 # k = Number of hash functions
 
-require_relative '../bitarray/bit_array_take_2'
+require_relative '../bitarray/bit_array'
 require 'digest'
 
 class BloomFilter
@@ -12,7 +12,7 @@ class BloomFilter
     @k = k
     @m = m
     @n = 0
-    @b = BitArray.new(@m)
+    @b = BitArray.new
   end
   
   # Probability of a false positive based on formula in wikipedia
@@ -36,7 +36,7 @@ class BloomFilter
     @k.times do |n|
       hash_val = Digest::MD5.hexdigest( item.to_s + n.to_s ).to_i(16)
       position = hash_val % @m
-      return @b.get(position)
+      return @b.get(position) == 1
     end     
     return false
   end  
