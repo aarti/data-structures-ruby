@@ -7,7 +7,7 @@ Data Structures in Ruby
 2. [MultiSet](multiset/Readme.md)
 3. [BitArray](bitarray/Readme.md)
 4. [Bloom Filter](bloom-filter/Readme.md)
-5. [Hash](hash/Readme.md)
+5. [Hash](hash/Readme.md) 
 6. [LinkedList](linked-list/Readme.md)
 7. [Stack](stack/Readme.md)
 8. [Queue](queue/Readme.md)
