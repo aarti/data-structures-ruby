@@ -7,15 +7,13 @@ class BitArray
     @field = 2**size 
   end
 
-  def set positions
-    bits = positions.kind_of?(Integer) ? [positions] : positions
-    bits.each {  |position| @field |= 1 << (@size - position) } 
+  def set *positions
+    positions.each {  |position| @field |= 1 << (@size - position) } 
     self
   end
   
-  def clear positions
-    bits = positions.kind_of?(Integer) ? [positions] : positions
-    bits.each {  |position| @field ^= 1 << (@size - position) } 
+  def clear *positions
+    positions.each {  |position| @field ^= 1 << (@size - position) } 
     self
   end  
 
