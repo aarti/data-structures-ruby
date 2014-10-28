@@ -9,6 +9,8 @@ require 'digest'
 class BloomFilter
   
   def initialize k: 1, m: 10
+    raise RangeError, "k must be smaller than m" if k >= m
+    raise ArgumentError, "k and m must be positive integers" if k < 1 || m < 1
     @k = k
     @m = m
     @n = 0
@@ -18,14 +20,14 @@ class BloomFilter
   # Probability of a false positive based on formula in wikipedia
   def false_positive_rate
     fp_rate = (1-(1-1/@m.to_f)**(@k.to_f*@n.to_f))**@k.to_f
-    p fp_rate
-    fp_rate.round(2)
+    fp_rate
   end 
    
+  ## Simplistic Hash, manages to set k bits but not a random distribution 
   def insert item
     @n += 1
     @k.times do |n|
-      hash_val = Digest::MD5.hexdigest( item.to_s + n.to_s ).to_i(16)
+      hash_val = digest item,n
       position = hash_val % @m
       @b.set position
     end  
@@ -33,12 +35,19 @@ class BloomFilter
   end   
   
   def include? item
+    item_included = false
     @k.times do |n|
-      hash_val = Digest::MD5.hexdigest( item.to_s + n.to_s ).to_i(16)
+      hash_val = digest item,n
       position = hash_val % @m
-      return @b.get(position) == 1
+      return false if @b.get(position).zero?
     end     
-    return false
+    true
   end  
+  
+  private
+  def digest item, n
+    Digest::MD5.hexdigest( "#{item}#{n}" ).to_i(16)
+  end  
+  
 
 end
