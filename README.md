@@ -3,7 +3,7 @@ data-structures-ruby
 
 Data Structures in Ruby
 
-[Slides](http://aarti.github.io/data-structures-ruby) 
+[Slides](http://aarti.github.io/data-structures-ruby) created using [reveal-ck](https://github.com/jedcn/reveal-ck) gem.
 
 
 1. [Set](code/set/Readme.md)
