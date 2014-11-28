@@ -457,14 +457,14 @@ Thanks for listening
 [5]: http://www.sergiy.ca/guide-to-selecting-appropriate-map-collection-in-java/
 [6]: https://github.com/ruby/ruby/blob/trunk/array.c#L5683
 [7]: http://anorwell.com/index.php?id=53
-[8]: https://github.com/aarti/data-structures-ruby/blob/master/stack/stack.rb
+[8]: https://github.com/aarti/data-structures-ruby/blob/gh-pages/code/stack/stack.rb
 [9]: http://www.java-samples.com/showtutorial.php?tutorialid=1125
-[10]: https://github.com/aarti/data-structures-ruby/blob/master/deque/deque.rb
+[10]: https://github.com/aarti/data-structures-ruby/blob/gh-pages/code/deque/deque.rb
 [11]: http://www.gotealeaf.com/blog/how-the-hash-works-in-ruby 
 [12]: http://www.confreaks.com/videos/4153-gogaruco2014-reimplementing-ruby-s-hash
-[13]: https://github.com/aarti/data-structures-ruby/blob/master/set/custom_set.rb
-[14]: https://github.com/aarti/data-structures-ruby/blob/master/multiset/multiset.rb
-[15]: https://github.com/aarti/data-structures-ruby/blob/master/bitarray/bit-array.rb
+[13]: https://github.com/aarti/data-structures-ruby/blob/gh-pages/code/set/custom_set.rb
+[14]: https://github.com/aarti/data-structures-ruby/blob/gh-pages/code/multiset/multiset.rb
+[15]: https://github.com/aarti/data-structures-ruby/blob/gh-pages/code/bitarray/bit-array.rb
 
 
 
