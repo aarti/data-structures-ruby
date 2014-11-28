@@ -1,0 +1,554 @@
+<section>
+<h1>Data Structures &amp; Ruby</h1>
+
+<p>By</p>
+
+<h2>Aarti Parikh</h2>
+<aside class="notes">Introduction, background
+</aside>
+</section>
+<section>
+
+<h1>Why study DS?</h1>
+
+<ol>
+<li> Search, Organize and Manipulate information</li>
+<li> Reduces complexity </li>
+<li> Efficiency in solving algorithms </li>
+</ol>
+
+</section>
+<section>
+<aside class="notes">Data Structures are building blocks that enable us to search, organize and manipulate information so we can discover meaning and solve problems.
+Maintainable code for complex problems
+Picking the right ds can reduces complexity 
+
+</aside>
+<h2>Terms, Definitions &amp; Properties</h2>
+
+<ol>
+<li>Linear Vs Non Linear</li>
+<li>Abstract Data type </li>
+<li>Time, Space Complexity &amp; Big O Notation </li>
+<li>Ordering in a data structure</li>
+<li>Mutable vs Immutable</li>
+<li>Concurrent</li>
+<li>Duplication </li>
+</ol>
+
+<p>Learn more <a href="http://xlinux.nist.gov/dads//">NIST- Official dictionary</a></p>
+<aside class="notes">Linear Data structures,  Arrays &amp; Lists
+Non Linear Data structures, Trees, Graphs
+Abstract Data type is a Model: Functional definition of a DS
+separate from its implementation, set of functions and
+constraints.
+Properties ( how they store data)
+What is the run time of ( insert, search, read )
+What is the space complexity to store
+Is ther ordering
+How does the ds deal with concurrency
+Are duplicates allowed.
+
+
+</aside>
+</section>
+<section>
+
+<h2>Big (O) notation</h2>
+
+<p>Growth rate of a function or a program</p>
+<pre><code>    # O(n) 
+    a = [1..1000]
+    a.each { |n| print n}  
+</code></pre>
+<pre><code>    # O(n^2) 
+    a,b = (1..10),(1..10)
+    a.each do |m|
+      b.each do |n|
+        p m*n
+      end  
+    end 
+</code></pre>
+<pre><code>    # O(n!) All possible permuattions of a string
+    "ruby".chars.to_a.permutation.map &amp;:join
+    =&gt; ["ruby", "ruyb", "rbuy", "rbyu", "ryub", "rybu", "urby", "uryb", "ubry", "ubyr", "uyrb", "uybr", "bruy", "bryu", "bury", "buyr", "byru", "byur", "yrub", "yrbu", "yurb", "yubr", "ybru", "ybur"]
+</code></pre>
+<aside class="notes"> The letter O is used because the growth rate of a function is also referred to as order of the function.
+ Performance as data increases
+ Number of loops
+
+</aside>
+</section>
+<section>
+
+<h2>Big (O) continued</h2>
+
+<p>Classic example <a href="http://rosettacode.org/wiki/Binary_search#Ruby">Binary Search</a> in sorted array</p>
+<pre><code class="ruby">    # O(log(n)) 
+    class Array
+      def binary_search(val, low=0, high=(length - 1))
+        return nil if high &lt; low
+        mid = (low + high) / 2
+        case
+          when self[mid] &gt; val then binary_search(val, low, mid-1)
+          when self[mid] &lt; val then binary_search(val, mid+1, high)
+          else mid
+        end
+      end
+    end
+</code></pre>
+<pre><code class="ruby">    # O(2^n) Recursive or Naive Fibonacci
+    def fibonacci(n)
+       n &lt;= 1 ? n :  fibonacci( n - 1 ) + fibonacci( n - 2 ) 
+    end
+</code></pre>
+</section>
+<section>
+
+<h2>Big(O) enables selection of DS</h2>
+
+<ol>
+<li>Insert</li>
+<li>Search </li>
+<li>Retrieve</li>
+<li>Space Used</li>
+</ol>
+
+<p><a href="http://bigocheatsheet.com/">Handy Cheatsheet</a></p>
+<aside class="notes">We look at big O properties of DS to determine the choice based on problem domain
+
+</aside>
+</section>
+<section>
+
+<h2>Common  DS</h2>
+
+<ul>
+<li>Array</li>
+<li>Hash, Bloom Filter</li>
+<li>Stack, Queue, Dequeue</li>
+<li>Linked Lists, Circular Buffers</li>
+<li>Set, BitArray</li>
+<li>Tree, Binary Search Tree, Heap, Trie</li>
+<li>Graph</li>
+</ul>
+<aside class="notes">Grouped by properties, some of the one one we will look at
+
+</aside>
+</section>
+<section>
+
+<h2>DS in Ruby Core &amp; Std</h2>
+
+<ul>
+<li>Array</li>
+<li>Hash</li>
+<li>Set, SortedSet</li>
+<li>Matrix</li>
+<li>Vector</li>
+<li>Range </li>
+</ul>
+<aside class="notes">Not that many to choose from  
+</aside>
+</section>
+<section>
+
+<h2>DS in Java</h2>
+
+<p>Java Collections Framework</p>
+
+<p><img src="./images/java-collections.png"></p>
+
+<p>Extensive use of DS not in Java Core</p>
+
+<ul>
+<li>
+<a href="http://commons.apache.org/proper/commons-collections/">Apache commons Collection</a><br>
+</li>
+<li><a href="https://code.google.com/p/google-collections/">Google Guave</a></li>
+</ul>
+
+<p>Enough DS to choose from that there is a <a href="http://www.sergiy.ca/guide-to-selecting-appropriate-map-collection-in-java/">flowchart</a> for selecting the right one.   </p>
+
+</section>
+<section>
+
+<h2>Why DS not as distinct in Ruby</h2>
+
+<p>Ruby's API blends queues, stacks, sets, arrays and lists in a few classes, for a richer api.</p>
+
+</section>
+<section>
+
+<h2>Array</h2>
+
+<ul>
+<li>Stack/Queue/Dequeue all in one</li>
+<li>LIFO and FIFO methods</li>
+<li>O(1) operations<br>
+
+<ul>
+<li>pop</li>
+<li>shift</li>
+</ul>
+</li>
+<li>Ruby's Array has more then <a href="https://github.com/ruby/ruby/blob/trunk/array.c#L5683">100</a> methods!</li>
+<li><a href="http://anorwell.com/index.php?id=53">Performance benchmarks for Array</a></li>
+</ul>
+
+</section>
+<section>
+
+<h1>Hash</h1>
+
+<ul>
+<li>Key/Vaue Pair</li>
+<li>O(1) insert, search, delete</li>
+<li>Internally an array</li>
+<li>Uses a hash function &amp; division method to fit data into an array</li>
+</ul>
+
+<h2>How it works</h2>
+
+<p><a href="http://www.gotealeaf.com/blog/how-the-hash-works-in-ruby">How the Hash works in Ruby</a></p>
+
+<h2>How to implement one in Ruby</h2>
+
+<p><a href="http://bigocheatsheet.com/">Hash implementation</a></p>
+
+</section>
+<section>
+
+<h2>Implementing DS in Ruby</h2>
+
+<ul>
+<li>Understand Ruby API's and implementation better</li>
+<li>A nice refresher/ academic exercise</li>
+<li>Discover libraries</li>
+</ul>
+
+<p>Let's start </p>
+
+</section>
+<section>
+
+<h2>Stack</h2>
+
+<ul>
+<li>FIFO</li>
+<li>Operations supported
+
+<ul>
+<li>push</li>
+<li>pop</li>
+<li>peek</li>
+</ul>
+</li>
+<li>Implementation varies
+
+<ul>
+<li>Array</li>
+<li>LinkedList</li>
+</ul>
+</li>
+</ul>
+
+<p><a href="https://github.com/aarti/data-structures-ruby/blob/master/stack/stack.rb">Stack Implementation using Array as storage</a>    </p>
+
+</section>
+<section>
+
+<h2>Queue</h2>
+
+<ul>
+<li>LIFO</li>
+<li>Operations supported
+
+<ul>
+<li>shift</li>
+<li>unshift</li>
+</ul>
+</li>
+<li>Implementation varies
+
+<ul>
+<li>Array</li>
+<li>LinkedList</li>
+</ul>
+</li>
+</ul>
+
+<p><a href="http://www.java-samples.com/showtutorial.php?tutorialid=1125">Queue Implementation using Forwardable and delgates so Storage is again Array</a>  </p>
+
+</section>
+<section>
+
+<h2>Deque</h2>
+
+<ul>
+<li>Double ended Queue </li>
+<li>LIFO &amp; FIFO</li>
+<li>Implementation with <a href="https://github.com/aarti/data-structures-ruby/blob/master/deque/deque.rb">storage as Linked List</a> </li>
+</ul>
+
+</section>
+<section>
+
+<h1>Set</h1>
+
+<ul>
+<li>Unordered elements</li>
+<li>Distinct elements</li>
+<li>Tests for membership/inclusion not necessarily retrieval</li>
+<li>No set in Core till 1.9.3</li>
+<li>MRI Ruby implemented as a Hash</li>
+<li>Faster then [1,2,3].uniq! since it is just a Hash</li>
+<li>No literal notation, use Set.new</li>
+<li>The expected operations in a Set
+-member? 
+-union |
+-intersection &amp; 
+-difference -
+-xor ^</li>
+<li>Used in rails for routing, caching etc.</li>
+</ul>
+
+</section>
+<section>
+
+<h1>SortedSet</h1>
+
+<ul>
+<li>Same properties of Set but ordered elements<br>
+</li>
+<li>MRI Ruby implements natively in C with a Red-Black Tree DS</li>
+<li>Sets in Java are also implemented in a similiar way. 
+
+<ul>
+<li>Java 's TreeSet ~ Ruby's SortedSet </li>
+<li>Java 's HashSet ~ Set</li>
+</ul>
+</li>
+</ul>
+
+</section>
+<section>
+
+<h1>CustomSet</h1>
+
+<ul>
+<li>Internally stored as an array</li>
+<li>Supports instantiation with any enumerable type</li>
+<li>Includes Enumerable and implements <code>each</code> to get some methods for free</li>
+<li>Return types should enable chaining</li>
+<li>Return types should not allow access to internal DS.</li>
+</ul>
+
+<p><a href="https://github.com/aarti/data-structures-ruby/blob/master/set/custom_set.rb">Implementation</a></p>
+
+</section>
+<section>
+
+<h1>MultiSet</h1>
+
+<ul>
+<li> members allowed to appear more than once. 
+
+<ul>
+<li>
+<code>{a, a, b}</code><br>
+</li>
+</ul>
+</li>
+<li>the order of elements is irrelevant: The multisets 
+
+<ul>
+<li>{a, a, b} and {a, b, a} are equal.</li>
+</ul>
+</li>
+<li>it provides the count or multiplicity of an element in the set. 
+
+<ul>
+<li>
+<code>count (a) = 2</code> </li>
+</ul>
+</li>
+<li>it can return the distinct elements of the set. 
+
+<ul>
+<li><code>{a, b}</code></li>
+</ul>
+</li>
+<li>it returns the cardinality of the set, total number of elements including duplicates.<br>
+
+<ul>
+<li><code>6</code></li>
+</ul>
+</li>
+</ul>
+
+<p><a href="https://github.com/aarti/data-structures-ruby/blob/master/multiset/multiset.rb">Implementation</a></p>
+
+</section>
+<section>
+
+<h1>BitArray</h1>
+
+<ul>
+<li>Set like DS, but dense packed bits</li>
+<li>Implemented using an array as storage</li>
+</ul>
+
+<p><a href="https://github.com/aarti/data-structures-ruby/blob/master/bitarray/bit-array.rb">Implementation</a></p>
+
+</section>
+<section>
+
+<h1>Bloom Filter</h1>
+
+<ul>
+<li>Check membership in a set</li>
+<li>Always gives a right answer if element is not present</li>
+<li>false positive if present</li>
+<li>Great for disk I/O</li>
+<li>Safe browsing</li>
+<li>Mix of hash &amp; Set</li>
+<li>uses multiple hash functions to verify membership</li>
+</ul>
+
+</section>
+<section>
+
+<h1>LinkedList</h1>
+
+<ul>
+<li><p>No LinkedList in Ruby</p></li>
+<li><p>Unshift is expensive in Ruby, adding elements to end of list is cheaper</p></li>
+<li><p><a href="http://www.sitepoint.com/rubys-missing-data-structure/">http://www.sitepoint.com/rubys-missing-data-structure/</a></p></li>
+<li><p>a couple implementations</p></li>
+</ul>
+
+</section>
+<section>
+
+<h1>Circular Buffer</h1>
+
+<ul>
+<li>Implemented using an array as storage</li>
+<li>Overwrites after full</li>
+</ul>
+
+</section>
+<section>
+
+<h1>Tree</h1>
+
+<ul>
+<li>Hierarchical DS</li>
+<li>n-Ary tree</li>
+<li>Binary Tree</li>
+<li>Binary Search Tree</li>
+<li>Heap</li>
+<li>Trie</li>
+<li>quick terminolgy
+
+<ul>
+<li>root</li>
+<li>leaf</li>
+<li>level</li>
+<li>path</li>
+<li>siblings</li>
+</ul>
+</li>
+<li>Real world usage, File system, RDBMS</li>
+</ul>
+
+</section>
+<section>
+
+<h1>BST</h1>
+
+<ul>
+<li>Binary tree with ordering</li>
+<li>left &lt; right</li>
+<li>no duplicates,</li>
+<li>Search/Insert/delete O(log n)</li>
+</ul>
+
+</section>
+<section>
+
+<h1>Heap</h1>
+
+<ul>
+<li>Binary tree</li>
+<li>Max/Min at root</li>
+<li>No order left/right</li>
+<li>Max heap, min heap</li>
+</ul>
+
+</section>
+<section>
+
+<h1>Trie</h1>
+
+<ul>
+<li>A tree with prefix stored</li>
+<li>Space efficient when there is repetition</li>
+<li>Example storing urls</li>
+</ul>
+<pre><code>     www -&gt; meetup -&gt; com -&gt; ruby -&gt; sv -&gt; 
+                          -&gt; java
+                          -&gt; hiking
+                   -&gt; net        
+</code></pre>
+</section>
+<section>
+
+<h1>Matrix</h1>
+
+<ul>
+<li>Creating multi dimensional arrays in Ruby</li>
+</ul>
+<pre><code>      a =[][]
+      a = Array.new() {} n dimensional matrix
+</code></pre>
+<ul>
+<li>Instead use Matrix class</li>
+</ul>
+<pre><code>  Matrix.build(3, 3) {|row, col| 0 }
+  =&gt; 0, 0, 0
+     0, 0, 0
+     0, 0, 0
+</code></pre>
+</section>
+<section>
+
+<h1>Graphs &amp; other DS</h1>
+
+<ul>
+<li>Graphs
+
+<ul>
+<li>Singly linked list is a basic graph</li>
+<li>Tree with loops</li>
+</ul>
+</li>
+<li>Sparse Matrices<br>
+</li>
+<li>Space Partitioning Trees </li>
+<li>K-D tree</li>
+</ul>
+
+</section>
+<section>
+
+<h1>Conclusion</h1>
+
+<p><a href="https://github.com/aarti/data-structures-ruby">Github repo</a> </p>
+
+<p>Please email feedback to aartiwithcode@gmail.com</p>
+
+<p>Thanks for listening</p>
+
+</section>

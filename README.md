@@ -15,6 +15,9 @@ Data Structures in Ruby
 10. [Graph](graph/Readme.md)
 11. [Circular Buffer](circular_buffer/Readme.md)
 12. [Binary Search Tree](bst/Readme.md)
-13. [Trie](trie/Readme.md)
-14. [Dequeue](dequeue/Readme.md)
+13. [Dequeue](dequeue/Readme.md)
 
+
+##Todo
+
+14. [Trie](trie/Readme.md)
