@@ -7,8 +7,9 @@ There are 3 types of children
 - Leaf Node
 - Internal Node
 
-Each node has two parallel structures of two arrays
-The first array is b-1 and the second b.
+The root must start with at least two children.
+
+
 
 
 # Implementation
