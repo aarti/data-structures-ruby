@@ -22,17 +22,11 @@ class Node
     if root? && key_array.first.nil?
       @key_array[0] = key
       @bplusarray[0] = value
+    else
+      insert_position = @key_array.find_index { |it| it.nil? || key < it }      
+      @key_array.insert insert_position, key
+      @bplusarray.insert insert_position, value
     end
-    # if is_root
-    #   if  @key_array.empty?
-    #     @key_array[0] = data.first
-    #     @bplusarray[0] = data.last
-    #   else
-    #     
-    #   end
-    # else
-    #   raise "foo"
-    # end
   end
   
   def to_s

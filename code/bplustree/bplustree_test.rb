@@ -19,12 +19,12 @@ class BplustreeTest < MiniTest::Unit::TestCase
   end
 
   def test_root_with_two_values
-    skip 'write it'
     branching_factor = 7
     first = KV.new "1","one"
     second = KV.new "2", "My Second Data"
     b  = Bplustree.new(branching_factor)
-    b.initialize_root first.key, first.value, second.key, second.value
+    b.insert first.key, first.value
+    b.insert second.key, second.value
 
     assert_equal first.value, b.get(first.key)
     assert_equal second.value, b.get(second.key)
