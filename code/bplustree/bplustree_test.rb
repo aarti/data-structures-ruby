@@ -31,10 +31,7 @@ class BplustreeTest < MiniTest::Unit::TestCase
   end
 
   def test_full_root
-    skip 'write it'
-    b  = Bplustree.new(branching_factor)
-    b.initialize_root first.key, first.value, second.key, second.value
-
+    b  = Bplustree.new(7)
     values = 1.upto(7).map { |it| KV.new it.to_s, it.to_s + "value" }
     values.each do |it|
       b.insert it.key, it.value
@@ -45,24 +42,18 @@ class BplustreeTest < MiniTest::Unit::TestCase
     end
   end
 
-  #
-  # # TODO
-  # def test_insert_some_data
-  #   first = KV.new "1","one"
-  #   second = KV.new "2", "My Second Data"
-  #   third =  KV.new "3", "data"
-  #
-  #   b  = Bplustree.new(3)
-  #   b.initialize_root first.key, first.value, second.key, second.value
-  #   b.insert third.key, third.value
-  #
-  #   assert b.root.is_leaf
-  #   assert b.root.is_root, 'first node should be root'
-  #
-  #   assert_equal first.value, b.get(first.key)
-  #   assert_equal second.value, b.get(second.key)
-  #   assert_equal third.value, b.get(third.key)
-  # end
-  
+  def test_split_root
+    b  = Bplustree.new(7)
+    values = 1.upto(7).map { |it| KV.new it.to_s, it.to_s + "value" }
+    values.each do |it|
+      b.insert it.key, it.value
+    end
+    eight = KV.new "8", "eighth value"
+    b.insert eight.key, eight.value
+    
+    assert_equal values[2].value, b.get(values[2].key)
+    assert_equal eight.value, b.get(eight.key)
+  end
+
   
 end
