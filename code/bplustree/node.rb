@@ -1,30 +1,27 @@
 class Node
-  attr_reader :key_array, :bplus_array, :is_leaf
-  
-
 
   def initialize(bfactor, is_leaf:, is_root:)
-    @key_array = Array.new(bfactor-1)
-    @bplus_array = Array.new(bfactor)
+    @bpa = BPlusArray.new bfactor
     @is_root = is_root
     @is_leaf = is_leaf
     @bfactor = bfactor
   end
 
   def get key
-    key_array.each_with_index do |k, i|
-      return bplus_array[i] if key == k
-    end
+    @bpa.get key
   end
 
   def root?
     @is_root
   end
+  
+  def leaf?
+    @is_leaf
+  end
 
   def insert key,value
     if root? && key_array.first.nil?
-      @key_array[0] = key
-      @bplus_array[0] = value
+      @bpa.insert key,value
     else
       if key_array_is_full
        split
@@ -84,6 +81,10 @@ class Node
   def split_upto
     ((@bfactor-1)/2.0).ceil
   end  
+  
+  def key_at idx
+    @bplusarray[idx]
+  end
 
 
   def to_s

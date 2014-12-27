@@ -55,6 +55,5 @@ class BplustreeTest < MiniTest::Unit::TestCase
     assert_equal values[2].value, b.get(values[2].key)
     assert_equal seven.value, b.get(seven.key)
   end
-
   
 end

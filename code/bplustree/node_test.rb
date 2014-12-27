@@ -24,12 +24,12 @@ class NodeTest < MiniTest::Unit::TestCase
      # Test Root after Split     
      refute root.is_leaf, "after split root is no longer a leaf"
    
-     assert_equal 4.to_s, root.key_array[0], "expected key after split to be 4 for (bfactor=7)/2 for the generated node"
-     assert_nil root.key_array[3], "after splitting root everything but the first key empty in the array"
-     assert_nil root.key_array[5], "after splitting root everything but the first key empty in the array"
-     
-     assert_kind_of Node, root.bplus_array[0], "after splliting first record should be a node, root is #{root.inspect}"
-     assert_kind_of Node, root.bplus_array[1],  "after splliting second record should also be a node, root is #{root.inspect}"
+     assert_equal 4.to_s, root.key_at(0), "expected key after split to be 4 for (bfactor=7)/2 for the generated node"
+     assert_nil root.key_at(3), "after splitting root everything but the first key empty in the array"
+     assert_nil root.key_at(5), "after splitting root everything but the first key empty in the array"
+     #
+     assert_kind_of Node, root.get(root.key_at(0)), "after splliting first record should be a node, root is #{root.inspect}"
+     assert_kind_of Node, root.get(root.key_at(1)),  "after splitting second record should also be a node, root is #{root.inspect}"
      assert_nil root.bplus_array[5], "after splitting everything but first 2 records should be empty"
      
   end
