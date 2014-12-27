@@ -32,7 +32,7 @@ class BplustreeTest < MiniTest::Unit::TestCase
 
   def test_full_root
     b  = Bplustree.new(7)
-    values = 1.upto(7).map { |it| KV.new it.to_s, it.to_s + "value" }
+    values = 1.upto(6).map { |it| KV.new it.to_s, it.to_s + "value" }
     values.each do |it|
       b.insert it.key, it.value
     end
@@ -42,17 +42,18 @@ class BplustreeTest < MiniTest::Unit::TestCase
     end
   end
 
-  def test_split_root
+  def test_getting_values_after_root_did_a_split_operation
+    skip 'until Node test is finished'
     b  = Bplustree.new(7)
-    values = 1.upto(7).map { |it| KV.new it.to_s, it.to_s + "value" }
+    values = 1.upto(6).map { |it| KV.new it.to_s, it.to_s + "value" }
     values.each do |it|
       b.insert it.key, it.value
     end
-    eight = KV.new "8", "eighth value"
-    b.insert eight.key, eight.value
+    seven = KV.new "7", "seventh value"
+    b.insert seven.key, seven.value
     
     assert_equal values[2].value, b.get(values[2].key)
-    assert_equal eight.value, b.get(eight.key)
+    assert_equal seven.value, b.get(seven.key)
   end
 
   
