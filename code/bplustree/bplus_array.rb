@@ -39,9 +39,11 @@ class BPlusArray
   
   def insert key, value
     insert_position = keys.find_index { |it| it.nil? || key < it }
+    print "#{insert_position}=insert_position"
     raise ArgumentError.new "BPlusArray is filled already" unless insert_position < @max_key_count
-    @bpa.insert insert_position, key
-    @bpa.insert (value_position insert_position), value
+    @bpa[insert_position] = key
+     @bpa[value_position insert_position] = value
+    p @bpa
   end
   
 end

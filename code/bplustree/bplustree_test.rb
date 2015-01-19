@@ -14,7 +14,6 @@ class BplustreeTest < MiniTest::Unit::TestCase
     first = KV.new "1","one"
     b  = Bplustree.new(branching_factor)
     b.insert first.key, first.value
-
     assert_equal first.value, b.get(first.key)
   end
 
@@ -25,7 +24,7 @@ class BplustreeTest < MiniTest::Unit::TestCase
     b  = Bplustree.new(branching_factor)
     b.insert first.key, first.value
     b.insert second.key, second.value
-
+    print b.inspect
     assert_equal first.value, b.get(first.key)
     assert_equal second.value, b.get(second.key)
   end
@@ -51,7 +50,7 @@ class BplustreeTest < MiniTest::Unit::TestCase
     end
     seven = KV.new "7", "seventh value"
     b.insert seven.key, seven.value
-    
+
     assert_equal values[2].value, b.get(values[2].key)
     assert_equal seven.value, b.get(seven.key)
   end
