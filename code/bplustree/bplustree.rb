@@ -22,7 +22,8 @@ class Bplustree
     unless @root
       @root = Node.new(@bfactor, is_leaf: false, is_root: true)
     end
-    @root.insert key,value
+    new_root = @root.insert key,value
+    @root = new_root if new_root
   end
 
 end

@@ -61,10 +61,12 @@ Are duplicates allowed.
 
 Growth rate of a function or a program
 
+Finding a record in an array of n records is O(n)
 ```    
     # O(n) 
+    x = 70
     a = [1..1000]
-    a.each { |n| print n}  
+    a.each { |n| print n if n == x }  
 ```
 ```    
     # O(n^2) 

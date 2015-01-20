@@ -42,7 +42,6 @@ class BplustreeTest < MiniTest::Unit::TestCase
   end
 
   def test_getting_values_after_root_did_a_split_operation
-    skip 'until Node test is finished'
     b  = Bplustree.new(7)
     values = 1.upto(6).map { |it| KV.new it.to_s, it.to_s + "value" }
     values.each do |it|
